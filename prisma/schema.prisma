@@ -12,3 +12,64 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id       Int     @id @default(autoincrement())
+  username String  @unique
+  password String
+  scores   Score[]
+}
+
+model Category {
+  id                     Int     @id @default(autoincrement())
+  name                   String  @unique
+  scoreUnlockRequirement Int
+  words                  Word[]
+  Score                  Score[]
+}
+
+model Word {
+  id         Int       @id @default(autoincrement())
+  english    String
+  romaji     String
+  hiragana   String?
+  katakana   String?
+  kanji      String?
+  Category   Category? @relation(fields: [categoryId], references: [id])
+  categoryId Int?
+}
+
+model Alphabet {
+  id                     Int         @id @default(autoincrement())
+  kana                   String
+  groups                 KanaGroup[]
+  scoreUnlockRequirement Int
+}
+
+model KanaGroup {
+  id                     Int         @id @default(autoincrement())
+  name                   String
+  scoreUnlockRequirement Int
+  characters             Character[]
+  Alphabet               Alphabet?   @relation(fields: [alphabetId], references: [id], onDelete: Cascade)
+  alphabetId             Int?
+  Score                  Score[]
+}
+
+model Character {
+  id          Int        @id @default(autoincrement())
+  romaji      String
+  kana        String
+  KanaGroup   KanaGroup? @relation(fields: [kanaGroupId], references: [id], onDelete: Cascade)
+  kanaGroupId Int?
+}
+
+model Score {
+  id          Int        @id @default(autoincrement())
+  User        User?      @relation(fields: [userId], references: [id])
+  userId      Int?
+  kanaGroup   KanaGroup? @relation(fields: [kanaGroupId], references: [id])
+  kanaGroupId Int?
+  category    Category?  @relation(fields: [categoryId], references: [id])
+  categoryId  Int?
+}
