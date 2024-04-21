@@ -9,10 +9,12 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
-export default function Login() {
+export default function LoginPage() {
   return (
-    <form>
+    <form action={login}>
       <Card>
         <CardHeader>
           <CardTitle>Manabu</CardTitle>
@@ -20,15 +22,52 @@ export default function Login() {
         </CardHeader>
         <CardContent>
           <Label htmlFor="username">Username</Label>
-          <Input id="username" placeholder="mannymarc" />
+          <Input id="username" placeholder="mannymarc" name="username" />
           <Label htmlFor="password">Password</Label>
-          <Input id="password" type="password" placeholder="•••••••" />
+          <Input
+            id="password"
+            type="password"
+            placeholder="•••••••"
+            name="password"
+          />
         </CardContent>
         <CardFooter>
           <Button variant="link">Register</Button>
-          <Button>Login</Button>
+          <Button type="submit">Login</Button>
         </CardFooter>
       </Card>
     </form>
   );
 }
+
+const login = async (formData: FormData) => {
+  "use server";
+  const username = formData.get("username");
+  const password = formData.get("password");
+
+  const baseUrl = process.env.URL || "";
+
+  const response = await fetch(`${baseUrl}/api/login`, {
+    method: "POST",
+    body: JSON.stringify({ username, password }),
+    headers: { "Content-Type": "application/json" },
+    credentials: "include",
+  });
+
+  if (!response.ok) {
+    //TODO Handle this
+  }
+
+  const result = await response.json();
+
+  const { token } = result;
+
+  cookies().set({
+    name: "token",
+    value: token,
+    httpOnly: true,
+    path: "/",
+  });
+
+  redirect("/home");
+};
