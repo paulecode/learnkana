@@ -19,6 +19,22 @@
   dependencies:
     regenerator-runtime "^0.14.0"
 
+"@carbon/icon-helpers@^10.47.0":
+  version "10.47.0"
+  resolved "https://registry.yarnpkg.com/@carbon/icon-helpers/-/icon-helpers-10.47.0.tgz#40a6618867980a6da3aedf0da9d8fd7fd078200a"
+  integrity sha512-vv2Wkuw7lYkYVKrn5ABzlZD+6ioAYwMuyKi2XPqYY3hrHYoL4CQUnuSFDhlj0DR2HHCB0L5MGRLxHLucx5cc7g==
+  dependencies:
+    "@ibm/telemetry-js" "^1.2.1"
+
+"@carbon/icons-react@^11.39.0":
+  version "11.39.0"
+  resolved "https://registry.yarnpkg.com/@carbon/icons-react/-/icons-react-11.39.0.tgz#3e27830a7f1e44a52e9ba49c8acefc55b10fb8a0"
+  integrity sha512-tKWAo62mAMi5YE0B+LUPlD1dQFgOz+4Z5LMSgQUAoJuDnTw32uXl0BQrSCDP2fXGolIsun280rBTbmPKok/aow==
+  dependencies:
+    "@carbon/icon-helpers" "^10.47.0"
+    "@ibm/telemetry-js" "^1.2.1"
+    prop-types "^15.7.2"
+
 "@eslint-community/eslint-utils@^4.2.0":
   version "4.4.0"
   resolved "https://registry.yarnpkg.com/@eslint-community/eslint-utils/-/eslint-utils-4.4.0.tgz#a23514e8fb9af1269d5f7788aa556798d61c6b59"
@@ -69,6 +85,11 @@
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/@humanwhocodes/object-schema/-/object-schema-2.0.3.tgz#4a2868d75d6d6963e423bcf90b7fd1be343409d3"
   integrity sha512-93zYdMES/c1D69yZiKDBj0V24vqNzB/koF26KPaagAfd3P/4gUlh3Dys5ogAK+Exi9QyzlD8x/08Zt7wIKcDcA==
+
+"@ibm/telemetry-js@^1.2.1":
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/@ibm/telemetry-js/-/telemetry-js-1.4.0.tgz#6eeba465ac987f315fbbfc2d24604103859ee249"
+  integrity sha512-Ae7kaHVPm8p/uky8VETxDKtIwXuyCybm6f/iRqWkx7ZLTA2aS3ArBp8wpewK7YxCi+0Z36nzERvkkwnZPPuQcQ==
 
 "@isaacs/cliui@^8.0.2":
   version "8.0.2"
@@ -2286,7 +2307,7 @@ prisma@^5.12.1:
   dependencies:
     "@prisma/engines" "5.12.1"
 
-prop-types@^15.8.1:
+prop-types@^15.7.2, prop-types@^15.8.1:
   version "15.8.1"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.8.1.tgz#67d87bf1a694f48435cf332c24af10214a3140b5"
   integrity sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==
