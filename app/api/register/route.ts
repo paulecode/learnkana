@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
 import { z } from "zod";
 import prisma from "@/lib/db";
 
@@ -21,7 +20,7 @@ export async function POST(req: NextRequest) {
   if (!result.success) {
     return NextResponse.json(
       { success: false, message: result.error.format() },
-      { status: 403 },
+      { status: 400 },
     );
   }
 
@@ -36,7 +35,7 @@ export async function POST(req: NextRequest) {
   if (user) {
     return NextResponse.json(
       { success: false, message: "User exists already" },
-      { status: 403 },
+      { status: 409 },
     );
   }
 
