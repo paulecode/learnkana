@@ -85,10 +85,10 @@ model KanaQuizSession {
 
 model KanaQuizChallenge {
   id                Int              @id @default(autoincrement())
-  KanaQuizSession   KanaQuizSession? @relation(fields: [kanaQuizSessionId], references: [id])
+  KanaQuizSession   KanaQuizSession? @relation(fields: [kanaQuizSessionId], references: [id], onDelete: Cascade)
   kanaQuizSessionId Int?
   challenge         String
-  question          String[]
+  options           String[]
   answer            String
-  givenAnswer       String
+  givenAnswer       String?
 }
