@@ -1,3 +1,5 @@
+import { Button } from "@/components/ui/button";
+import KanaTable from "@/compounds/KanaTable/KanaTable";
 import { KanaGroup, Prisma } from "@prisma/client";
 
 export default async function HiraganaPage() {
@@ -10,16 +12,7 @@ export default async function HiraganaPage() {
     <div>
       <p>Hiragana</p>
       <p>Hiragana is used for...</p>
-      {groups.map((group) => {
-        return (
-          <div key={group.id}>
-            <p>{group.name}</p>
-            {group.characters.map((character) => {
-              return <div key={character.id}>{character.kana}</div>;
-            })}
-          </div>
-        );
-      })}
+      <KanaTable groups={groups} />
     </div>
   );
 }
