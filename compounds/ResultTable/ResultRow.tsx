@@ -1,4 +1,5 @@
 import { SelectedKanaQuizChallenge } from "@/app/home/practice/result/page";
+import { Checkmark, CircleStroke } from "@carbon/icons-react";
 
 const ResultRow: React.FC<{ challenge: SelectedKanaQuizChallenge }> = ({
   challenge,
@@ -9,13 +10,15 @@ const ResultRow: React.FC<{ challenge: SelectedKanaQuizChallenge }> = ({
   console.log(isCorrect);
 
   return (
-    <div className={isCorrect ? "bg-green-400" : "bg-red-400"}>
-      <p>Question</p>
+    <div className="col-span-full grid grid-cols-subgrid items-center justify-items-center py-2 ring-gray-200 odd:bg-gray-100 hover:bg-gray-800 hover:text-white hover:ring-1">
       <p>{question}</p>
-      <p>Your answer</p>
       <p>{givenAnswer}</p>
-      <p>Correct answer</p>
       <p>{answer}</p>
+      {isCorrect ? (
+        <Checkmark className="mx-4 h-6 w-6 justify-self-start text-green-600" />
+      ) : (
+        <CircleStroke className="mx-4 h-6 w-6 justify-self-start text-red-600" />
+      )}
     </div>
   );
 };

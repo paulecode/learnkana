@@ -22,17 +22,24 @@ export default async function ResultPage() {
   } = await getQuizSession();
 
   return (
-    <div>
-      <p>Welcome to my Resultpage</p>
-      <p>
-        {correctAnswers}/{totalAnswers}
-      </p>
-      <ResultTable results={answers} />
-      <Button variant="link">
+    <div className="flex grow flex-col bg-gray-50">
+      <Button variant="link" className="self-start p-4">
         <Link href="/home/hiragana" replace>
           Go back
         </Link>
       </Button>
+      <div className="grid place-content-center">
+        <div className="flex flex-col gap-2 p-4">
+          <p className="heading-02">Results</p>
+          <div className="flex items-center gap-2">
+            <p>Your score:</p>
+            <p>
+              {correctAnswers}/{totalAnswers}
+            </p>
+          </div>
+        </div>
+        <ResultTable results={answers} />
+      </div>
     </div>
   );
 }

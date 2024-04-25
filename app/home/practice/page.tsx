@@ -62,7 +62,7 @@ const loadQuizSession = async () => {
   return { randomQuestion, unansweredCount, totalCount };
 };
 
-const postAnswer = async (prevState: any, formData: FormData) => {
+const postAnswer = async (_: any, formData: FormData) => {
   "use server";
 
   const answer = formData.get("answer");
