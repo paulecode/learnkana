@@ -77,7 +77,7 @@ model Score {
 
 model KanaQuizSession {
   id         Int                 @id @default(autoincrement())
-  User       User                @relation(fields: [userId], references: [id])
+  User       User                @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId     Int
   date       DateTime            @default(now())
   challenges KanaQuizChallenge[]
