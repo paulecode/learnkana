@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import ResultTable from "@/compounds/ResultTable/ResultTable";
 import getToken from "@/middleware/getToken";
 import isAuthenticated from "@/middleware/isAuthenticated";
+import { ArrowLeft } from "@carbon/icons-react";
 import { Prisma } from "@prisma/client";
 import Link from "next/link";
 import { redirect } from "next/navigation";
@@ -23,9 +24,10 @@ export default async function ResultPage() {
 
   return (
     <div className="flex grow flex-col bg-gray-50">
-      <Button variant="link" className="self-start p-4">
-        <Link href="/home/hiragana" replace>
-          Go back
+      <Button variant="link" className="self-start p-8">
+        <Link href="/home/hiragana" className="flex items-center gap-2">
+          <ArrowLeft />
+          <p>Go back</p>
         </Link>
       </Button>
       <div className="grid place-content-center">
