@@ -15,6 +15,15 @@ export async function POST(req: NextRequest) {
     throw new Error("User not found");
   }
 
+  const existingSession = await prisma.kanaQuizSession.findMany({
+    where: { userId: user.id },
+  });
+
+  // Deactivate as soon as we want to track statistics
+  if (existingSession) {
+    await prisma.kanaQuizSession.deleteMany({ where: { userId: user.id } });
+  }
+
   const letterGroup = await prisma.kanaGroup.findUniqueOrThrow({
     where: { id: Number(group) },
     include: { characters: true },
