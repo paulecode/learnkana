@@ -4,10 +4,10 @@ import { NextRequest, NextResponse } from "next/server";
 export async function GET(req: NextRequest) {
   const { searchParams } = req.nextUrl;
 
-  const alphabetParam = Number(searchParams.get("alphabet"));
+  const alphabetParam = searchParams.get("alphabet") || "";
 
-  const alphabet = await prisma.alphabet.findUnique({
-    where: { id: alphabetParam },
+  const alphabet = await prisma.alphabet.findFirst({
+    where: { kana: alphabetParam },
     include: { groups: { include: { characters: true } } },
   });
 
