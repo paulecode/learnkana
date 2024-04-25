@@ -1,6 +1,5 @@
-import { Button } from "@/components/ui/button";
 import KanaTable from "@/compounds/KanaTable/KanaTable";
-import { KanaGroup, Prisma } from "@prisma/client";
+import { Prisma } from "@prisma/client";
 
 export default async function HiraganaPage() {
   type KanaGroupWithCharacter = Prisma.KanaGroupGetPayload<{
@@ -18,14 +17,21 @@ export default async function HiraganaPage() {
 }
 
 const getHiragana = async () => {
-  const baseURL = process.env.URL || "";
-  const response = await fetch(`${baseURL}/api/getKana?alphabet=1`, {
-    method: "GET",
-  });
+  const baseURL = process.env.NEXT_PUBLIC_URL || "";
 
-  const result = await response.json();
+  try {
+    const response = await fetch(`${baseURL}/api/getKana?alphabet=1`, {
+      method: "GET",
+    });
+    const result = await response.json();
 
-  const { groups } = result.alphabet;
+    if (!result.ok) {
+      throw new Error("Couldn't load alphabet");
+    }
+    const { groups } = result.alphabet;
 
-  return groups;
+    return groups;
+  } catch (e) {
+    return [];
+  }
 };
