@@ -1,27 +1,41 @@
-import getToken from "@/middleware/getToken";
+"use client";
+import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { Prisma, User } from "@prisma/client";
 
-type SelectUser = Prisma.UserGetPayload<{
+export type SelectUser = Prisma.UserGetPayload<{
   select: { username: true; id: true };
 }>;
 
-const UserDropDown: React.FC = async () => {
-  const user: SelectUser = await getUser();
-  return <p>{user.username}</p>;
+const UserDropDown: React.FC<{
+  user: SelectUser;
+  outlogger: any;
+  deleter: any;
+}> = ({ user, outlogger, deleter }) => {
+  return (
+    <div>
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button variant="outline">{user.username}</Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent>
+          <DropdownMenuLabel>Your account</DropdownMenuLabel>
+          <DropdownMenuItem onSelect={() => outlogger()}>
+            Log out
+          </DropdownMenuItem>
+          <DropdownMenuItem onSelect={() => deleter()} className="text-red-400">
+            Delete account
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    </div>
+  );
 };
 
-const getUser = async () => {
-  const id = getToken();
-
-  const baseUrl = process.env.NEXT_PUBLIC_URL || "";
-  const response = await fetch(`${baseUrl}/api/getUser?id=${id}`);
-
-  if (!response.ok) {
-    throw new Error("An Error has occured");
-  }
-
-  const { user } = await response.json();
-
-  return user;
-};
 export default UserDropDown;

@@ -1,11 +1,11 @@
 import { Toaster } from "@/components/ui/toaster";
-import UserDropDown from "@/compounds/UserDropDown/UserDropDown";
+import UserDropDownWrapper from "@/compounds/UserDropDown/UserDropDownWrapper";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div className="h-screen w-full">
       <div>
-        <UserDropDown />
+        <UserDropDownWrapper />
       </div>
       {children}
       <Toaster />
