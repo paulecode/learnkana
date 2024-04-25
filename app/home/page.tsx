@@ -9,8 +9,13 @@ export default function HomePage() {
     redirect("/");
   }
   return (
-    <div>
-      <Link href="/home/hiragana">Practice Hiragana</Link>
+    <div className="grid grow place-content-center">
+      <Link href="/home/hiragana">
+        <div className="buttonSquare">
+          <p>Practice Hiragana</p>
+          <ArrowRight />
+        </div>
+      </Link>
     </div>
   );
 }

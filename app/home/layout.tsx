@@ -3,7 +3,7 @@ import UserDropDownWrapper from "@/compounds/UserDropDown/UserDropDownWrapper";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="h-screen w-full">
+    <div className="flex h-screen w-full flex-col">
       <div className="border-b border-gray-200">
         <UserDropDownWrapper />
       </div>
