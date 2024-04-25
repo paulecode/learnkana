@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/button";
 import KanaTable from "@/compounds/KanaTable/KanaTable";
 import { ArrowLeft } from "@carbon/icons-react";
 import { Prisma } from "@prisma/client";
