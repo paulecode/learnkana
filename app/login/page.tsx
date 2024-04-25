@@ -45,7 +45,7 @@ const login = async (formData: FormData) => {
   const username = formData.get("username");
   const password = formData.get("password");
 
-  const baseUrl = process.env.URL || "";
+  const baseUrl = process.env.NEXT_PUBLIC_URL || "";
 
   const response = await fetch(`${baseUrl}/api/login`, {
     method: "POST",

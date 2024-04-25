@@ -32,7 +32,7 @@ const postAnswer = async (formData: FormData) => {
 
   console.log({ answer });
 
-  const baseUrl = process.env.URL || "";
+  const baseUrl = process.env.NEXT_PUBLIC_URL || "";
   const response = await fetch(`${baseUrl}/api/postAnswer`, {
     method: "PATCH",
     headers: { "Content-Type": "application/json" },

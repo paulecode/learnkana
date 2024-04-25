@@ -45,7 +45,7 @@ const register = async (formData: FormData) => {
   const username = formData.get("username");
   const password = formData.get("password");
 
-  const baseUrl = process.env.URL || "";
+  const baseUrl = process.env.NEXT_PUBLIC_URL || "";
 
   const registerResponse = await fetch(`${baseUrl}/api/register`, {
     method: "POST",

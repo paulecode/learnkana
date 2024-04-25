@@ -43,7 +43,7 @@ const requestQuizSession = async (formData: FormData) => {
 
   const group = formData.get("group");
 
-  const baseUrl = process.env.URL || "";
+  const baseUrl = process.env.NEXT_PUBLIC_URL || "";
   const response = await fetch(`${baseUrl}/api/createQuizSession`, {
     method: "POST",
     body: JSON.stringify({ id, group }),

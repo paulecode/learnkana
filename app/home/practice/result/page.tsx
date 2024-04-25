@@ -20,7 +20,7 @@ const getQuizSession = async () => {
 
   const id = getToken();
 
-  const baseUrl = process.env.URL || "";
+  const baseUrl = process.env.NEXT_PUBLIC_URL || "";
 
   const response = await fetch(`${baseUrl}/api/getLatestQuizSession?id=${id}`);
 
