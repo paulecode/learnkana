@@ -13,7 +13,7 @@ const KanaTable: React.FC<{ groups: KanaGroupWithCharacter[] }> = async ({
   return (
     <form
       action={requestQuizSession}
-      className="grid grid-rows-10 sm:grid-cols-10"
+      className="grid grid-rows-10 sm:grid-cols-10 sm:grid-rows-none"
     >
       {groups.map((group) => {
         return <KanaRow kanaGroup={group} key={group.id} />;
@@ -27,7 +27,7 @@ const KanaRow: React.FC<{ kanaGroup: KanaGroupWithCharacter }> = ({
 }) => {
   return (
     <button key={kanaGroup.id} name="group" value={kanaGroup.id} className="">
-      <div className="flex h-full flex-row justify-between sm:col-span-full sm:flex-col">
+      <div className="flex h-full flex-row justify-between hover:bg-gray-900 hover:text-white sm:col-span-full sm:flex-col">
         {kanaGroup.characters.map((character) => {
           return <KanaRowEntry key={character.id} kana={character} />;
         })}
@@ -37,7 +37,7 @@ const KanaRow: React.FC<{ kanaGroup: KanaGroupWithCharacter }> = ({
 };
 const KanaRowEntry: React.FC<{ kana: Character }> = ({ kana }) => {
   return (
-    <div className="group/entry grid h-16 w-16 place-content-center">
+    <div className="group/entry grid h-16 w-16 place-content-center border-gray-900 transition-[background-color] ease-in-out hover:border hover:bg-white hover:text-black">
       <p className="group-hover/entry:hidden">{kana.kana}</p>
       <p className="hidden group-hover/entry:inline">{kana.romaji}</p>
     </div>
