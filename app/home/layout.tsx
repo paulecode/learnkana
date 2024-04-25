@@ -7,7 +7,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <div className="border-b border-gray-200 shadow">
         <UserDropDownWrapper />
       </div>
-      {children}
+      <div className="flex grow flex-col overflow-y-auto">{children}</div>
       <Toaster />
     </div>
   );
