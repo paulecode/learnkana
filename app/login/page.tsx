@@ -56,6 +56,8 @@ const login = async (formData: FormData) => {
 
   if (!response.ok) {
     //TODO Handle this
+    console.log(response);
+    return;
   }
 
   const result = await response.json();
