@@ -1,0 +1,17 @@
+@layer base {
+  .heading-01 {
+    @apply text-[16px] font-normal
+  }
+
+  .heading-02 {
+    @apply text-[24px] font-normal
+  }
+
+  .heading-03 {
+    @apply text-[32px] font-normal
+  }
+
+  .heading-04 {
+    @apply text-[48px] font-normal
+  }
+}
