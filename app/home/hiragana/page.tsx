@@ -11,16 +11,28 @@ export default async function HiraganaPage() {
 
   const groups: KanaGroupWithCharacter[] = await getHiragana();
   return (
-    <div className="flex grow flex-col border border-blue-400">
-      <Link className="flex items-center gap-2" href="/home" replace>
+    <div className="flex grow flex-col">
+      <Link className="flex items-center gap-2 p-4" href="/home" replace>
         <ArrowLeft />
         <p className="font-semibold">Go back</p>
       </Link>
 
-      <div className="grow border border-red-400">
-        <p className="heading-04">Hiragana</p>
-        <p>Hiragana is used for...</p>
-        <div className="grid place-content-center">
+      <div className="flex grow flex-col justify-around lg:flex-row">
+        <div className="flex flex-col gap-8 p-12">
+          <div className="flex w-fit flex-col gap-4 rounded-2xl bg-gradient-to-br from-[#efefef] to-white p-6 shadow-[20px_20px_60px_#d4d4d4,_-20px_-20px_50px_#ffffff] lg:w-auto">
+            <p className="heading-04 font-semibold">Hiragana</p>
+            <p className="max-w-96 text-gray-900">
+              {`
+Hiragana is a key script in the Japanese writing system, noted for
+its cursive style. It's primarily used for native Japanese words and
+grammatical elements such as verb endings and particles. This script
+is essential for forming sentences and is particularly useful for
+beginners learning Japanese pronunciation.
+`}
+            </p>
+          </div>
+        </div>
+        <div className="grid grow place-content-center py-16">
           <KanaTable groups={groups} />
         </div>
       </div>
