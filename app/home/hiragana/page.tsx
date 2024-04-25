@@ -11,7 +11,7 @@ export default async function HiraganaPage() {
 
   const groups: KanaGroupWithCharacter[] = await getHiragana();
   return (
-    <div className="flex grow flex-col">
+    <div className="flex grow flex-col bg-gray-50">
       <Link className="flex items-center gap-2 p-4" href="/home" replace>
         <ArrowLeft />
         <p className="font-semibold">Go back</p>
