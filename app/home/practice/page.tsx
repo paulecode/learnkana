@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import QuizForm from "@/compounds/QuizForm/QuizForm";
 import getToken from "@/middleware/getToken";
 import isAuthenticated from "@/middleware/isAuthenticated";
+import { revalidateTag } from "next/cache";
 import Link from "next/link";
 import { RedirectType, redirect } from "next/navigation";
 
@@ -13,7 +14,7 @@ export default async function PracticePage() {
         <Link href="/home/hiragana">Go back</Link>
       </Button>
       <p>Practice Page</p>
-      <QuizForm challenge={randomQuestion} />
+      <QuizForm challenge={randomQuestion} serverAction={postAnswer} />
     </div>
   );
 }
@@ -47,4 +48,25 @@ const loadQuizSession = async () => {
   }
 
   return randomQuestion;
+};
+
+const postAnswer = async (prevState: any, formData: FormData) => {
+  "use server";
+
+  const answer = formData.get("answer");
+  const answerId = formData.get("answerId");
+
+  console.log({ answer });
+
+  const baseUrl = process.env.NEXT_PUBLIC_URL || "";
+  const response = await fetch(`${baseUrl}/api/postAnswer`, {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ answerId, answer }),
+  });
+
+  const { isCorrect, correctAnswer } = await response.json();
+
+  revalidateTag("question");
+  return { isCorrect, correctAnswer };
 };
