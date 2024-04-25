@@ -8,5 +8,9 @@ export default function HomePage() {
   if (!isAuthenticated()) {
     redirect("/");
   }
-  return <div>Welcome to (Protected) home</div>;
+  return (
+    <div>
+      <Link href="/home/hiragana">Practice Hiragana</Link>
+    </div>
+  );
 }
