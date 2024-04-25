@@ -20,18 +20,22 @@ const getHiragana = async () => {
   const baseURL = process.env.NEXT_PUBLIC_URL || "";
 
   try {
-    const response = await fetch(`${baseURL}/api/getKana?alphabet=1`, {
+    const response = await fetch(`${baseURL}/api/getKana?alphabet=HIRAGANA`, {
       method: "GET",
     });
-    const result = await response.json();
 
-    if (!result.ok) {
+    if (!response.ok) {
       throw new Error("Couldn't load alphabet");
     }
+
+    const result = await response.json();
+
     const { groups } = result.alphabet;
 
     return groups;
   } catch (e) {
+    console.log("Something went wrong while trying to fetch hiragana");
+    console.log((e as Error).message);
     return [];
   }
 };
