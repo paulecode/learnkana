@@ -18,8 +18,8 @@ export default async function HiraganaPage() {
       </Link>
 
       <div className="flex grow flex-col justify-around lg:flex-row">
-        <div className="flex flex-col gap-8 p-12">
-          <div className="flex w-fit flex-col gap-4 rounded-2xl bg-gradient-to-br from-[#efefef] to-white p-6 shadow-[20px_20px_60px_#d4d4d4,_-20px_-20px_50px_#ffffff] lg:w-auto">
+        <div className="flex flex-col items-center gap-8 p-4 sm:items-start md:p-12 lg:px-24">
+          <div className="flex w-fit flex-col gap-4 rounded-2xl from-[#efefef] to-white p-6 lg:w-auto lg:bg-gradient-to-br lg:shadow-[20px_20px_60px_#d4d4d4,_-20px_-20px_50px_#ffffff]">
             <p className="heading-04 font-semibold">Hiragana</p>
             <p className="max-w-96 text-gray-900">
               {`

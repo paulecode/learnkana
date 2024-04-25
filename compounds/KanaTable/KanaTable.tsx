@@ -27,7 +27,7 @@ const KanaRow: React.FC<{ kanaGroup: KanaGroupWithCharacter }> = ({
 }) => {
   return (
     <button key={kanaGroup.id} name="group" value={kanaGroup.id} className="">
-      <div className="flex h-full flex-row justify-between hover:bg-gray-900 hover:text-white sm:col-span-full sm:flex-col">
+      <div className="flex h-full flex-row justify-between hover:bg-gray-900 hover:text-white hover:shadow-2xl sm:col-span-full sm:flex-col">
         {kanaGroup.characters.map((character) => {
           return <KanaRowEntry key={character.id} kana={character} />;
         })}
