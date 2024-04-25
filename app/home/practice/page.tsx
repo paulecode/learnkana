@@ -14,7 +14,7 @@ export default async function PracticePage() {
   return (
     <div className="flex grow flex-col justify-between bg-gray-50">
       <Button variant="link" className="self-start p-8">
-        <Link href="/home/hiragana" className="flex items-center gap-2">
+        <Link href="/home" className="flex items-center gap-2">
           <ArrowLeft />
           <p>Go back</p>
         </Link>
