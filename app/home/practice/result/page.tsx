@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import ResultTable from "@/compounds/ResultTable/ResultTable";
 import getToken from "@/middleware/getToken";
 import isAuthenticated from "@/middleware/isAuthenticated";
-import { KanaQuizChallenge, Prisma } from "@prisma/client";
+import { Prisma } from "@prisma/client";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
@@ -23,13 +23,15 @@ export default async function ResultPage() {
 
   return (
     <div>
-      <p>Welcome to my resultpage</p>
+      <p>Welcome to my Resultpage</p>
       <p>
         {correctAnswers}/{totalAnswers}
       </p>
       <ResultTable results={answers} />
       <Button variant="link">
-        <Link href="hiragana">Go back</Link>
+        <Link href="/home/hiragana" replace>
+          Go back
+        </Link>
       </Button>
     </div>
   );
@@ -52,7 +54,6 @@ const getQuizSession = async () => {
   }
 
   const result = await response.json();
-  console.log(result);
 
   const { answers, totalAnswers, correctAnswers } = result;
 

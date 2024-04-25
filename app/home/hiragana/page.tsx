@@ -1,5 +1,7 @@
+import { Button } from "@/components/ui/button";
 import KanaTable from "@/compounds/KanaTable/KanaTable";
 import { Prisma } from "@prisma/client";
+import Link from "next/link";
 
 export default async function HiraganaPage() {
   type KanaGroupWithCharacter = Prisma.KanaGroupGetPayload<{
@@ -9,6 +11,11 @@ export default async function HiraganaPage() {
   const groups: KanaGroupWithCharacter[] = await getHiragana();
   return (
     <div>
+      <Button variant="link">
+        <Link href="/home" replace>
+          Go back
+        </Link>
+      </Button>
       <p>Hiragana</p>
       <p>Hiragana is used for...</p>
       <KanaTable groups={groups} />
