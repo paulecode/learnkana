@@ -1,20 +1,30 @@
 import { Button } from "@/components/ui/button";
+import { Progress } from "@/components/ui/progress";
 import QuizForm from "@/compounds/QuizForm/QuizForm";
 import getToken from "@/middleware/getToken";
 import isAuthenticated from "@/middleware/isAuthenticated";
+import { ArrowLeft } from "@carbon/icons-react";
 import { revalidateTag } from "next/cache";
 import Link from "next/link";
 import { RedirectType, redirect } from "next/navigation";
 
 export default async function PracticePage() {
-  const randomQuestion = await loadQuizSession();
+  const { randomQuestion, unansweredCount, totalCount } =
+    await loadQuizSession();
   return (
-    <div>
-      <Button variant="link">
-        <Link href="/home/hiragana">Go back</Link>
+    <div className="flex grow flex-col justify-between border border-red-400">
+      <Button variant="link" className="self-start">
+        <Link href="/home/hiragana" className="flex items-center gap-2">
+          <ArrowLeft />
+          <p>Go back</p>
+        </Link>
       </Button>
-      <p>Practice Page</p>
+
       <QuizForm challenge={randomQuestion} serverAction={postAnswer} />
+      <Progress
+        value={((totalCount - unansweredCount) / totalCount) * 100}
+        className="mb-16 h-2 max-w-96 self-center"
+      />
     </div>
   );
 }
@@ -41,13 +51,15 @@ const loadQuizSession = async () => {
 
   const { randomQuestion, unansweredCount, totalCount } = result;
 
+  console.log(totalCount);
   console.log(unansweredCount);
+  console.log(100 - Math.floor(unansweredCount / totalCount) * 100);
 
   if (unansweredCount == 0) {
     redirect("/home/practice/result", "push" as RedirectType);
   }
 
-  return randomQuestion;
+  return { randomQuestion, unansweredCount, totalCount };
 };
 
 const postAnswer = async (prevState: any, formData: FormData) => {
