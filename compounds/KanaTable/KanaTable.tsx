@@ -2,8 +2,7 @@ import { Button } from "@/components/ui/button";
 import getToken from "@/middleware/getToken";
 import isAuthenticated from "@/middleware/isAuthenticated";
 import { Prisma } from "@prisma/client";
-import Link from "next/link";
-import { redirect } from "next/navigation";
+import { RedirectType, redirect } from "next/navigation";
 
 type KanaGroupWithCharacter = Prisma.KanaGroupGetPayload<{
   include: { characters: true };
@@ -53,9 +52,13 @@ const requestQuizSession = async (formData: FormData) => {
 
   if (!response.ok) {
     //TODO: Handle this
-    console.log("why");
+    console.log(response);
+    throw new Error(
+      "Something went wrong while trying to create a quiz session",
+    );
   }
 
-  // redirect("/practice");
+  redirect("/home/practice", "push" as RedirectType);
 };
+
 export default KanaTable;
