@@ -1,12 +1,17 @@
+import { Button } from "@/components/ui/button";
 import QuizForm from "@/compounds/QuizForm/QuizForm";
 import getToken from "@/middleware/getToken";
 import isAuthenticated from "@/middleware/isAuthenticated";
+import Link from "next/link";
 import { RedirectType, redirect } from "next/navigation";
 
 export default async function PracticePage() {
   const randomQuestion = await loadQuizSession();
   return (
     <div>
+      <Button variant="link">
+        <Link href="/home/hiragana">Go back</Link>
+      </Button>
       <p>Practice Page</p>
       <QuizForm challenge={randomQuestion} />
     </div>

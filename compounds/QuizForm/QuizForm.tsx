@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { KanaQuizChallenge } from "@prisma/client";
 import { revalidateTag } from "next/cache";
-import { useState } from "react";
 
 const QuizForm: React.FC<{ challenge: Omit<KanaQuizChallenge, "answer"> }> = ({
   challenge,
