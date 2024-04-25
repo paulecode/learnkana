@@ -12,8 +12,8 @@ export default async function PracticePage() {
   const { randomQuestion, unansweredCount, totalCount } =
     await loadQuizSession();
   return (
-    <div className="flex grow flex-col justify-between border border-red-400">
-      <Button variant="link" className="self-start">
+    <div className="flex grow flex-col justify-between bg-gray-50">
+      <Button variant="link" className="self-start p-8">
         <Link href="/home/hiragana" className="flex items-center gap-2">
           <ArrowLeft />
           <p>Go back</p>
@@ -23,7 +23,7 @@ export default async function PracticePage() {
       <QuizForm challenge={randomQuestion} serverAction={postAnswer} />
       <Progress
         value={((totalCount - unansweredCount) / totalCount) * 100}
-        className="mb-16 h-2 max-w-96 self-center"
+        className="mb-8 h-2 w-4/5 self-center sm:mb-16 sm:w-96"
       />
     </div>
   );
