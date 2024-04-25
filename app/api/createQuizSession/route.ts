@@ -66,7 +66,7 @@ export async function POST(req: NextRequest) {
       questionPool.push(romajiToKana ? randomItem.romaji : randomItem.kana);
     }
 
-    questionPool.length = 3;
+    questionPool.length = Math.ceil(letterGroup.length / 2);
 
     let { kana: answer, romaji: challenge } = answerChar;
 
