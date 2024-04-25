@@ -11,7 +11,6 @@ const isAuthenticated = () => {
   }
 
   const token = cookie.value || "";
-  console.log("cooking");
 
   try {
     jwt.verify(token, secret);

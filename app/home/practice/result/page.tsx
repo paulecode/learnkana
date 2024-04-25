@@ -1,14 +1,36 @@
+import { Button } from "@/components/ui/button";
+import ResultTable from "@/compounds/ResultTable/ResultTable";
 import getToken from "@/middleware/getToken";
 import isAuthenticated from "@/middleware/isAuthenticated";
-import { KanaQuizChallenge } from "@prisma/client";
+import { KanaQuizChallenge, Prisma } from "@prisma/client";
+import Link from "next/link";
 import { redirect } from "next/navigation";
 
+export type SelectedKanaQuizChallenge = Prisma.KanaQuizChallengeGetPayload<{
+  select: { challenge: true; answer: true; givenAnswer: true; id: true };
+}>;
+
 export default async function ResultPage() {
-  const quizSession = await getQuizSession();
+  const {
+    answers,
+    totalAnswers,
+    correctAnswers,
+  }: {
+    answers: SelectedKanaQuizChallenge[];
+    totalAnswers: number;
+    correctAnswers: number;
+  } = await getQuizSession();
+
   return (
     <div>
       <p>Welcome to my resultpage</p>
-      <div>{}</div>
+      <p>
+        {correctAnswers}/{totalAnswers}
+      </p>
+      <ResultTable results={answers} />
+      <Button variant="link">
+        <Link href="hiragana">Go back</Link>
+      </Button>
     </div>
   );
 }
@@ -22,18 +44,17 @@ const getQuizSession = async () => {
 
   const baseUrl = process.env.NEXT_PUBLIC_URL || "";
 
-  const response = await fetch(`${baseUrl}/api/getLatestQuizSession?id=${id}`);
+  const response = await fetch(`${baseUrl}/api/getQuizResults?id=${id}`);
 
-  const result = await response.json();
-
-  if (!result.ok) {
-    console.log(result);
+  if (!response.ok) {
+    console.log(response);
     throw new Error("Something went wrong");
   }
 
+  const result = await response.json();
   console.log(result);
 
-  // const { quizSession } = result;
+  const { answers, totalAnswers, correctAnswers } = result;
 
-  // return quizSession;
+  return { answers, totalAnswers, correctAnswers };
 };
