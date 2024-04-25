@@ -16,7 +16,7 @@ import { redirect } from "next/navigation";
 
 export default function LoginPage() {
   return (
-    <div className="grid h-screen place-content-center">
+    <div className="grid h-screen place-content-center bg-gray-50 shadow-xl">
       <form action={register}>
         <Card className="flex w-fit flex-col gap-6 sm:w-96">
           <CardHeader>

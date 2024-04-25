@@ -10,7 +10,7 @@ export default function Home() {
   console.log(isAuthenticated());
 
   return (
-    <div className="grid h-screen place-content-center gap-16">
+    <div className="grid h-screen place-content-center gap-16 bg-gray-50">
       <div>
         <p className="heading-04">Kana</p>
         <p className="heading-03">Manabu</p>
