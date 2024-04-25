@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import getToken from "@/middleware/getToken";
 import isAuthenticated from "@/middleware/isAuthenticated";
-import { Prisma } from "@prisma/client";
+import { Character, Prisma } from "@prisma/client";
 import { RedirectType, redirect } from "next/navigation";
 
 type KanaGroupWithCharacter = Prisma.KanaGroupGetPayload<{
@@ -12,25 +12,33 @@ const KanaTable: React.FC<{ groups: KanaGroupWithCharacter[] }> = async ({
   groups,
 }) => {
   return (
-    <form action={requestQuizSession}>
+    <form action={requestQuizSession} className="grid grid-cols-10">
       {groups.map((group) => {
-        return (
-          <div key={group.id}>
-            <p>{group.name}</p>
-            {group.characters.map((character) => {
-              return (
-                <div className="inline" key={character.id}>
-                  {character.kana}
-                </div>
-              );
-            })}
-            <Button name="group" value={group.id}>
-              Practice
-            </Button>
-          </div>
-        );
+        return <KanaRow kanaGroup={group} key={group.id} />;
       })}
     </form>
+  );
+};
+
+const KanaRow: React.FC<{ kanaGroup: KanaGroupWithCharacter }> = ({
+  kanaGroup,
+}) => {
+  return (
+    <button key={kanaGroup.id} name="group" value={kanaGroup.id} className="">
+      <div className="col-span-full flex h-full flex-col justify-between">
+        {kanaGroup.characters.map((character) => {
+          return <KanaRowEntry key={character.id} kana={character} />;
+        })}
+      </div>
+    </button>
+  );
+};
+const KanaRowEntry: React.FC<{ kana: Character }> = ({ kana }) => {
+  return (
+    <div className="group/entry h-16 w-16">
+      <p className="group/entry-hover:hidden">{kana.kana}</p>
+      <p className="group/entry-hover:inline hidden">{kana.romaji}</p>
+    </div>
   );
 };
 

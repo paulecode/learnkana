@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import KanaTable from "@/compounds/KanaTable/KanaTable";
+import { ArrowLeft } from "@carbon/icons-react";
 import { Prisma } from "@prisma/client";
 import Link from "next/link";
 
@@ -10,15 +11,19 @@ export default async function HiraganaPage() {
 
   const groups: KanaGroupWithCharacter[] = await getHiragana();
   return (
-    <div>
-      <Button variant="link">
-        <Link href="/home" replace>
-          Go back
-        </Link>
-      </Button>
-      <p>Hiragana</p>
-      <p>Hiragana is used for...</p>
-      <KanaTable groups={groups} />
+    <div className="flex grow flex-col border border-blue-400">
+      <Link className="flex items-center gap-2" href="/home" replace>
+        <ArrowLeft />
+        <p className="font-semibold">Go back</p>
+      </Link>
+
+      <div className="grow border border-red-400">
+        <p className="heading-04">Hiragana</p>
+        <p>Hiragana is used for...</p>
+        <div className="grid place-content-center">
+          <KanaTable groups={groups} />
+        </div>
+      </div>
     </div>
   );
 }
