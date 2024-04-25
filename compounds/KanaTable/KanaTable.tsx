@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/button";
 import getToken from "@/middleware/getToken";
 import isAuthenticated from "@/middleware/isAuthenticated";
 import { Character, Prisma } from "@prisma/client";
@@ -12,7 +11,10 @@ const KanaTable: React.FC<{ groups: KanaGroupWithCharacter[] }> = async ({
   groups,
 }) => {
   return (
-    <form action={requestQuizSession} className="grid grid-cols-10">
+    <form
+      action={requestQuizSession}
+      className="grid grid-rows-10 sm:grid-cols-10"
+    >
       {groups.map((group) => {
         return <KanaRow kanaGroup={group} key={group.id} />;
       })}
@@ -25,7 +27,7 @@ const KanaRow: React.FC<{ kanaGroup: KanaGroupWithCharacter }> = ({
 }) => {
   return (
     <button key={kanaGroup.id} name="group" value={kanaGroup.id} className="">
-      <div className="col-span-full flex h-full flex-col justify-between">
+      <div className="flex h-full flex-row justify-between sm:col-span-full sm:flex-col">
         {kanaGroup.characters.map((character) => {
           return <KanaRowEntry key={character.id} kana={character} />;
         })}
@@ -35,9 +37,9 @@ const KanaRow: React.FC<{ kanaGroup: KanaGroupWithCharacter }> = ({
 };
 const KanaRowEntry: React.FC<{ kana: Character }> = ({ kana }) => {
   return (
-    <div className="group/entry h-16 w-16">
-      <p className="group/entry-hover:hidden">{kana.kana}</p>
-      <p className="group/entry-hover:inline hidden">{kana.romaji}</p>
+    <div className="group/entry grid h-16 w-16 place-content-center">
+      <p className="group-hover/entry:hidden">{kana.kana}</p>
+      <p className="hidden group-hover/entry:inline">{kana.romaji}</p>
     </div>
   );
 };
