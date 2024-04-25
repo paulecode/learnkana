@@ -11,5 +11,8 @@ export async function GET(req: NextRequest) {
     include: { groups: { include: { characters: true } } },
   });
 
+  console.log("getKana Route hit");
+  console.log({ alphabet });
+
   return NextResponse.json({ success: true, alphabet }, { status: 200 });
 }

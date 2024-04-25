@@ -28,8 +28,10 @@ const getHiragana = async () => {
       throw new Error("Couldn't load alphabet");
     }
 
+    console.log("Response from Route getKana");
     const result = await response.json();
 
+    console.log(result);
     const { groups } = result.alphabet;
 
     return groups;
