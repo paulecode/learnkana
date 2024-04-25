@@ -22,9 +22,11 @@ const UserDropDown: React.FC<{
     <div>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="outline">{user.username}</Button>
+          <Button className="min-w-32" variant="outline">
+            <span>{user.username}</span>
+          </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent>
+        <DropdownMenuContent className="min-w-32">
           <DropdownMenuLabel>Your account</DropdownMenuLabel>
           <DropdownMenuItem onSelect={() => outlogger()}>
             Log out

@@ -36,7 +36,9 @@ const UserDropDownWrapper = async () => {
 
   const user = await getUser();
   return (
-    <UserDropDown user={user} outlogger={logUserOut} deleter={deleteUser} />
+    <div className="py-2 pl-4">
+      <UserDropDown user={user} outlogger={logUserOut} deleter={deleteUser} />
+    </div>
   );
 };
 
