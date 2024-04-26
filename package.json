@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "prisma migrate dev --skip-seed && prisma db seed && next build",
+    "build": "next build",
+    "prod:build": "yarn prisma migrate deploy && yarn prisma db seed && next build",
     "start": "next start",
     "lint": "next lint",
     "postinstall": "prisma generate"
