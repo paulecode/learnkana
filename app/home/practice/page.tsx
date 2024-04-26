@@ -22,7 +22,7 @@ export default async function PracticePage() {
 
       <QuizForm challenge={randomQuestion} serverAction={postAnswer} />
       <Progress
-        value={((totalCount - unansweredCount) / totalCount) * 100}
+        value={Math.floor(((totalCount - unansweredCount) / totalCount) * 100)}
         className="mb-8 h-2 w-4/5 self-center sm:mb-16 sm:w-96"
       />
     </div>
@@ -53,7 +53,7 @@ const loadQuizSession = async () => {
 
   console.log(totalCount);
   console.log(unansweredCount);
-  console.log(100 - Math.floor(unansweredCount / totalCount) * 100);
+  console.log(Math.floor((totalCount - unansweredCount) / totalCount) * 100);
 
   if (unansweredCount == 0) {
     redirect("/home/practice/result", "push" as RedirectType);
