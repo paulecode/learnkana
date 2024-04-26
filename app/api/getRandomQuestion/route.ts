@@ -19,7 +19,7 @@ export async function GET(req: NextRequest) {
     where: { kanaQuizSessionId: quizSession.id },
   });
 
-  if (unansweredCount == 0) {
+  if (unansweredCount === 0) {
     return NextResponse.json(
       { success: true, unansweredCount, totalCount },
       { status: 200 },
