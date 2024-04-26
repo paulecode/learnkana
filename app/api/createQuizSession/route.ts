@@ -79,6 +79,7 @@ export async function POST(req: NextRequest) {
       0,
       answer,
     );
+    console.log(`For ${answerChar} generate question set ${[...questionPool]}`);
 
     await prisma.kanaQuizChallenge.create({
       data: {
