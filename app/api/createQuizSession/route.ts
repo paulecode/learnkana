@@ -26,7 +26,7 @@ export async function POST(req: NextRequest) {
     await prisma.kanaQuizSession.deleteMany({ where: { userId: user.id } });
   }
 
-  const letterGroup = await prisma.kanaGroup.findUnique({
+  const letterGroup = await prisma.kanaGroup.findFirst({
     where: { id: Number(group) },
     include: { characters: true },
   });
@@ -35,6 +35,7 @@ export async function POST(req: NextRequest) {
     console.log("Couldn't find lettergroup");
     throw new Error("letter group doesn't exist");
   }
+
   console.log("Found lettergroup");
 
   const generateQuestionSet = async (letterGroup: Character[]) => {
