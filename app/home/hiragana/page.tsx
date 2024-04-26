@@ -51,15 +51,17 @@ const getHiragana = async () => {
     });
 
     if (!response.ok) {
+      console.error(response);
       throw new Error("Couldn't load alphabet");
     }
 
-    console.log("Response from Route getKana");
+    console.log("Response from Route getHiragana");
     const result = await response.json();
 
     console.log(result);
     const { groups } = result.alphabet;
 
+    console.log(groups);
     return groups;
   } catch (e) {
     console.log("Something went wrong while trying to fetch hiragana");

@@ -58,6 +58,7 @@ const getKatakana = async () => {
 
     console.log(result);
     const { groups } = result.alphabet;
+    console.log(groups);
 
     return groups;
   } catch (e) {
