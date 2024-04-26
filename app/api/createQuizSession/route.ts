@@ -11,11 +11,13 @@ export async function POST(req: NextRequest) {
     where: { id: Number(id) },
   });
 
+  console.log(`Route create QuizSession hit, group parameter ${group}`);
+
   if (!user) {
     throw new Error("User not found");
   }
 
-  const existingSession = await prisma.kanaQuizSession.findMany({
+  const existingSession = await prisma.kanaQuizSession.findFirst({
     where: { userId: user.id },
   });
 
@@ -24,10 +26,16 @@ export async function POST(req: NextRequest) {
     await prisma.kanaQuizSession.deleteMany({ where: { userId: user.id } });
   }
 
-  const letterGroup = await prisma.kanaGroup.findUniqueOrThrow({
+  const letterGroup = await prisma.kanaGroup.findUnique({
     where: { id: Number(group) },
     include: { characters: true },
   });
+
+  if (!letterGroup) {
+    console.log("Couldn't find lettergroup");
+    throw new Error("letter group doesn't exist");
+  }
+  console.log("Found lettergroup");
 
   const generateQuestionSet = async (letterGroup: Character[]) => {
     const quizSession = await prisma.kanaQuizSession.create({
@@ -91,7 +99,7 @@ export async function POST(req: NextRequest) {
     });
   };
 
-  generateQuestionSet(letterGroup.characters);
+  await generateQuestionSet(letterGroup.characters);
 
   return NextResponse.json({ success: true }, { status: 200 });
 }
